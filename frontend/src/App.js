@@ -9,6 +9,7 @@ import LoginFormModal from "./components/LoginFormModal";
 import SignUpFormModal from "./components/SignUpFormModal/index";
 import AboutMe from "./components/AboutME/AboutMe";
 import Skills from "./components/Skills/Skills"; // 🆕
+import Resume from "./components/Resume/Resume"
 
 import { restoreUser } from "./store/session";
 
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route exact path="/skills">
             <Skills />
+          </Route>
+          <Route exact path="/resume">
+            <Resume />
           </Route>
         </Switch>
       )}

@@ -1,185 +1,220 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import {
-  AppBar,
-  Toolbar,
   Box,
   Button,
   Typography,
-  Container,
   Grid,
-  Paper,
+  Container,
 } from "@mui/material";
-import SignUpFormModal from "../SignUpFormModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import RoleCard from "../RoleCard/RoleCard";
+import { Code, Security, MusicNote, Audiotrack } from "@mui/icons-material";
 
-const LandingPage = () => {
-  const amazingUser = useSelector((state) => state.session.user);
+const roles = [
+  {
+    title: "Full Stack Developer",
+    description: "Building modern web applications with scalable and reusable code.",
+    icon: Code,
+    image: "/Images/web-development-coding-programming-futuristic-banner-computer-code-laptop_3482-5572.avif",
+    portfolioLink: "/resume",
+  },
+  {
+    title: "Cybersecurity Student",
+    description: "Protecting systems and networks with cutting-edge security knowledge.",
+    icon: Security,
+    image: "/Images/adobestock_857262714.jpeg",
+    portfolioLink: "/resume",
+  },
+  {
+    title: "Audio Plugin Developer",
+    description: "Creating powerful audio tools for sound designers and musicians.",
+    icon: Audiotrack,
+    image: "/Images/istockphoto-1287065554-612x612.jpg",
+    portfolioLink: "/products",
+  },
+  {
+    title: "Music Producer",
+    description: "Crafting music and instrumentals that inspire and connect with audiences.",
+    icon: MusicNote,
+    image: "/Images/tumblr_428a8b79bdec68abd26b37ba2ca5c6d3_e1932f4c_1280.jpg",
+    portfolioLink: "https://www.youtube.com/@DoomsProduction",
+  },
+];
+
+const HeroSection = ({ user }) => {
+  const theme = useTheme();
 
   return (
-    <>
-      {/* Navbar */}
-      <AppBar
-        position="sticky"
-        color="transparent"
-        elevation={0}
-        sx={{
-          backdropFilter: "blur(12px)",
-          background: "rgba(15, 32, 39, 0.5)",
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: "bold",
-              color: "primary.main",
-              letterSpacing: 1,
-            }}
-          >
-            Adam's Hub
-          </Typography>
-          {!amazingUser && (
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              modalComponent={<SignUpFormModal />}
-            />
-          )}
-        </Toolbar>
-      </AppBar>
-
-      {/* Hero Section */}
-      <Box
-        sx={{
-          py: { xs: 10, md: 16 },
-          textAlign: "center",
-          background: "linear-gradient(to bottom, #0f2027 0%, #1a2a33 100%)",
-        }}
-      >
-        <Container maxWidth="md">
-          <Typography
-            variant="h2"
-            sx={{
-              fontWeight: 600,
-              letterSpacing: "-0.5px",
-              lineHeight: 1.2,
-              fontSize: { xs: "2rem", md: "3.5rem" },
-              textTransform: "uppercase",
-              color: "white",
-            }}
-          >
-            EXPLORE // CREATE // PROTECT
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{ color: "text.secondary", mb: 4, mt: 2 }}
-          >
-            Dive into development, music production, and plugin innovation.
-          </Typography>
-          {!amazingUser && (
-            <Button
-              variant="contained"
-              sx={{
-                mt: 3,
-                px: 5,
-                py: 1.5,
-                borderRadius: "30px",
-                fontWeight: 600,
-                backgroundColor: "#00e5ff",
-                color: "#000",
-                "&:hover": {
-                  backgroundColor: "#00bcd4",
-                },
-              }}
-              onClick={() => document.querySelector("#cta-footer").scrollIntoView({ behavior: "smooth" })}
+    <Box
+      sx={{
+        py: { xs: 10, md: 16 },
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={6} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              Join the Magic
-            </Button>
-          )}
-        </Container>
-      </Box>
-
-      {/* Feature Cards */}
-      <Container sx={{ py: 10 }} maxWidth="lg">
-        <Grid container spacing={6} justifyContent="center">
-          {[{
-            title: "Explore Projects",
-            description: "High-quality beats, sample kits, and exclusive drops ready for your next project.",
-            to: "/products",
-            color: "#00e5ff",
-          }, {
-            title: "About the Creator",
-            description: "Get to know the vision behind Adam’s Hub — from VSTs to mastering production.",
-            to: "/about",
-            color: "#ff69b4",
-          }, {
-            title: "Skills",
-            description: "Check out the full-stack, plugin dev, and cybersecurity skills that power the hub.",
-            to: "/skills",
-            color: "#64ffda",
-          }].map(({ title, description, to, color }) => (
-            <Grid item xs={12} md={4} key={title}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: { xs: "2.5rem", md: "3.5rem" },
+                  color: theme.palette.secondary.main,
+                  mb: 2,
+                }}
               >
-                <NavLink to={to} style={{ textDecoration: "none", color }}>
-                <Paper
-                  elevation={8}
+                Explore. Create. Protect.
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  color: theme.palette.text.secondary,
+                  fontSize: "1.15rem",
+                  mb: 4,
+                }}
+              >
+                Full-Stack Developer • Cybersecurity Student • Music Producer
+              </Typography>
+
+              {/* {!user && (
+                <Button
+                  variant="contained"
+                  color="primary"
                   sx={{
-                    p: 6,
-                    borderRadius: 6,
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    backdropFilter: "blur(20px)",
-                    textAlign: "center",
-                    color: color,
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    boxShadow: `0 0 30px ${color}33`,
+                    px: 4,
+                    py: 1.5,
+                    borderRadius: "999px",
+                    boxShadow: "none",
+                    textTransform: "none",
                     "&:hover": {
-                      transform: "translateY(-6px)",
-                      boxShadow: `0 12px 40px ${color}55`,
+                      backgroundColor: theme.palette.primary.dark,
+                      transform: "scale(1.03)",
                     },
                   }}
+                  onClick={() =>
+                    document.querySelector("#cta-footer").scrollIntoView({ behavior: "smooth" })
+                  }
                 >
-                  <Typography variant="h5" gutterBottom>
-                      {title}
-                  </Typography>
-                  <Typography color="text.secondary">{description}</Typography>
-                </Paper>
-                </NavLink>
-              </motion.div>
-            </Grid>
-          ))}
+                  Join the Magic
+                </Button>
+              )} */}
+            </motion.div>
+          </Grid>
+
+          <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
+            <motion.img
+              src="/Images/selfie.jpg"
+              alt="Hero"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              style={{
+                width: "100%",
+                maxWidth: 280,
+                borderRadius: theme.shape.borderRadius * 2,
+              }}
+            />
+          </Grid>
         </Grid>
       </Container>
-
-      {/* CTA Footer */}
-      {!amazingUser && (
-        <Box
-          id="cta-footer"
-          sx={{
-            background: "linear-gradient(to right, #0f2027, #203a43)",
-            py: 6,
-            textAlign: "center",
-            borderTop: "1px solid rgba(255,255,255,0.1)",
-          }}
-        >
-          <Typography variant="h5" gutterBottom sx={{ color: "#80deea" }}>
-            Ready to explore?
-          </Typography>
-          <OpenModalMenuItem
-            itemText="Create an account!"
-            modalComponent={<SignUpFormModal />}
-            className="cta-btn"
-          />
-        </Box>
-      )}
-    </>
+    </Box>
   );
 };
+
+const RolesGrid = () => {
+  return (
+    <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Grid container spacing={4}>
+        {roles.map((role, index) => (
+          <Grid item xs={12} sm={6} key={index}>
+            <RoleCard {...role} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
+};
+
+const FooterCTA = () => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      id="cta-footer"
+      sx={{
+        py: 10,
+        textAlign: "center",
+        backgroundColor: theme.palette.background.default,
+        borderTop: `1px solid ${theme.palette.divider}`,
+      }}
+    >
+      <Typography
+        variant="h5"
+        sx={{ mb: 2, fontWeight: 500 }}
+      >
+        Ready to explore?
+      </Typography>
+      <Typography
+        variant="body2"
+        sx={{ mb: 3, color: theme.palette.text.secondary }}
+      >
+        Start building something magical today.
+      </Typography>
+
+      {/* <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          borderRadius: "999px",
+          px: 4,
+          py: 1.5,
+          fontWeight: 600,
+          boxShadow: "none",
+          textTransform: "none",
+          "&:hover": {
+            backgroundColor: theme.palette.primary.dark,
+            transform: "scale(1.03)",
+          },
+        }}
+      >
+        Create an account
+      </Button> */}
+    </Box>
+  );
+};
+
+const LandingPage = () => {
+  const user = useSelector((state) => state.session.user);
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        position: "relative", // Required for absolute positioning of blobs inside
+        overflow: "hidden",   // Prevent scrollbars from blobs
+        backgroundColor: theme.palette.background.default,
+        width: "100vw",
+        minHeight: "100vh",
+        margin: 0,
+        padding: 0,
+      }}
+    >
+      {/* === Content === */}
+      <HeroSection user={user} />
+      <RolesGrid />
+      {!user && <FooterCTA />}
+    </Box>
+  );
+};
+
 
 export default LandingPage;

@@ -5,28 +5,42 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     background: {
-      default: "#0f2027",
-      paper: "rgba(255,255,255,0.08)",
+      default: "#0A0903",
+      paper: "rgba(220, 19, 108, 0.08)", // DC136C with transparency
     },
     primary: {
-      main: "#00bcd4", // cyan
+      main: "#DC136C", // bold pink
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#26c6da", // lighter cyan
+      main: "#FDCFF3", // soft pink
+      contrastText: "#000000",
+    },
+    tertiary: {
+      main: "#00BBF9", // bright cyan/blue
+    },
+    muted: {
+      main: "#FDCFF3", // reusing soft pink as a light accent
     },
     text: {
-      primary: "#e0f7fa",
-      secondary: "#b2ebf2",
+      primary: "#FFFFFF",
+      secondary: "rgba(255, 255, 255, 0.7)",
     },
   },
   typography: {
     fontFamily: `"Inter", "Roboto", "Helvetica", "Arial", sans-serif`,
+    h2: {
+      fontWeight: 700,
+      fontSize: "3.5rem",
+    },
     h5: {
       fontWeight: 700,
-      textShadow: "0 1px 2px rgba(0,0,0,0.5)",
     },
     body1: {
       lineHeight: 1.8,
+    },
+    subtitle1: {
+      color: "rgba(255,255,255,0.7)",
     },
   },
   shape: {
@@ -35,11 +49,20 @@ const theme = createTheme({
   components: {
     MuiCard: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           backdropFilter: "blur(10px)",
-          background: "rgba(255, 255, 255, 0.08)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          background: theme.palette.background.paper,
+          border: `1px solid ${theme.palette.primary.main}40`, // 25% alpha
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+        }),
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          fontWeight: 600,
+          textTransform: "none",
         },
       },
     },

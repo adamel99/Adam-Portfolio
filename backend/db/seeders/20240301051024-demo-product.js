@@ -23,12 +23,12 @@ module.exports = {
           userId: 3, // Replace with your admin user's ID
         },
         {
-          productName: "LinkUp",
+          productName: "DoomsProd Music - E-commerce",
           productType: "Full Stack Website",
           price: 0,
-          description: "A mock creation of the Meetup website!",
+          description: "A full-stack e-commerce website where artists, musicians, producers and more can purchase/lease beats, loop kits and drum kits!",
           uploadDate: new Date(),
-          filePath: "/path/to/demo-loop-1.zip",
+          filePath: "/Images/beatpage.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
           genre: 'Jersey',

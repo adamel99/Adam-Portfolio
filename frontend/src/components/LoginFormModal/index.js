@@ -2,39 +2,37 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/Modal";
-
 import {
   Box,
   Button,
   TextField,
   Typography,
-  Card as MuiCard,
+  Card,
   CardContent,
   Alert,
 } from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 
-import { styled } from "@mui/material/styles";
-
-const Card = styled(MuiCard)(({ theme }) => ({
+const ThemedCard = styled(Card)(({ theme }) => ({
   width: "100%",
   maxWidth: 500,
-  borderRadius: 0,
+  borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(3),
   margin: "0 auto",
-  background: "black",
+  background: theme.palette.background.paper,
   backdropFilter: "blur(12px)",
-  boxShadow: "0 8px 30px black",
-  border: "1px solid black",
+  boxShadow: theme.shadows[10],
+  border: `1px solid ${theme.palette.primary.main}40`,
 }));
 
-const NeonButton = styled(Button)(({ theme }) => ({
+const ThemedButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(4),
   padding: theme.spacing(1.5),
-  fontWeight: "bold",
-  background: "linear-gradient(90deg, #00e5ff, #ff69b4)",
-  color: "black",
-  '&:hover': {
-    background: "linear-gradient(90deg, #00bcd4, #ff4081)",
+  fontWeight: theme.typography.fontWeightBold,
+  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+  color: theme.palette.primary.contrastText,
+  "&:hover": {
+    background: `linear-gradient(90deg, ${theme.palette.primary.dark}, ${theme.palette.tertiary.main})`,
   },
 }));
 
@@ -42,6 +40,7 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const user = useSelector((state) => state.session.user);
+  const theme = useTheme();
 
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -57,9 +56,7 @@ function LoginFormModal() {
       .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
+        if (data && data.errors) setErrors(data.errors);
       });
   };
 
@@ -67,13 +64,13 @@ function LoginFormModal() {
     credential.length < minUsernameLength || password.length < minPasswordLength;
 
   return (
-    <Card>
+    <ThemedCard>
       <CardContent>
         <Typography
           variant="h4"
           align="center"
           gutterBottom
-          sx={{ color: "#00e5ff", fontWeight: "bold" }}
+          sx={{ color: theme.palette.primary.main, fontWeight: "bold" }}
         >
           Log In
         </Typography>
@@ -89,8 +86,10 @@ function LoginFormModal() {
             onChange={(e) => setCredential(e.target.value)}
             fullWidth
             required
-            InputLabelProps={{ style: { color: "#80deea" } }}
-            inputProps={{ style: { color: "#fff" } }}
+            InputLabelProps={{
+              style: { color: theme.palette.text.secondary },
+            }}
+            inputProps={{ style: { color: theme.palette.text.primary } }}
           />
           {errors.credential && <Alert severity="error">{errors.credential}</Alert>}
 
@@ -101,22 +100,24 @@ function LoginFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             fullWidth
             required
-            InputLabelProps={{ style: { color: "#80deea" } }}
-            inputProps={{ style: { color: "#fff" } }}
+            InputLabelProps={{
+              style: { color: theme.palette.text.secondary },
+            }}
+            inputProps={{ style: { color: theme.palette.text.primary } }}
           />
           {errors.password && <Alert severity="error">{errors.password}</Alert>}
 
-          <NeonButton
+          <ThemedButton
             type="submit"
             fullWidth
             variant="contained"
             disabled={isButtonDisabled}
           >
             Log In
-          </NeonButton>
+          </ThemedButton>
         </Box>
       </CardContent>
-    </Card>
+    </ThemedCard>
   );
 }
 
