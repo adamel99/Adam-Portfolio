@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
   const navLinks = [
     { to: "/about", label: "About" },
     { to: "/skills", label: "Skills" },
-    { to: "/products", label: "Products" },
+    { to: "/products", label: "Projects" },
     { to: "/resume", label: "Resume" }, // ✅ New link
   ];
 

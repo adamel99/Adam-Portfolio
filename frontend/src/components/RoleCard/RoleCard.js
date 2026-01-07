@@ -4,7 +4,6 @@ import {
   Typography,
   Box,
   Button,
-  Stack,
   useTheme,
 } from "@mui/material";
 
@@ -15,14 +14,17 @@ const RoleCard = ({ image, icon: Icon, title, description, portfolioLink }) => {
     <Card
       sx={{
         position: "relative",
-        height: "100%",
-        borderRadius: 3,
+        display: "flex",
+        flexDirection: "column",
+        height: "100%", // ensures equal height in flex parent
+        borderRadius: 4,
         overflow: "hidden",
-        boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backgroundColor: theme.palette.background.paper,
+        transition: "transform 0.4s ease, border-color 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 12px 24px rgba(0, 0, 0, 0.2)",
+          borderColor: "rgba(255,255,255,0.25)",
         },
       }}
     >
@@ -30,28 +32,22 @@ const RoleCard = ({ image, icon: Icon, title, description, portfolioLink }) => {
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
+          inset: 0,
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          zIndex: 1,
+          transition: "transform 0.5s ease",
+          "&:hover": { transform: "scale(1.05)" },
         }}
       />
 
-      {/* Full Blur Overlay */}
+      {/* Gradient Overlay */}
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backdropFilter: "blur(3px)",
-          backgroundColor: "rgba(0, 0, 0, 0.4)",
-          zIndex: 2,
+          inset: 0,
+          background: "linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.25))",
+          zIndex: 1,
         }}
       />
 
@@ -59,54 +55,43 @@ const RoleCard = ({ image, icon: Icon, title, description, portfolioLink }) => {
       <Box
         sx={{
           position: "relative",
-          zIndex: 3,
+          zIndex: 2,
           p: 3,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "100%",
+          flex: 1, // pushes footer button down
         }}
       >
         <Box>
-          {Icon && (
-            <Box mb={2}>
-              <Icon sx={{ fontSize: 36, color: "#fff" }} />
-            </Box>
-          )}
-          <Typography variant="h6" sx={{ fontWeight: 600, color: "#fff", mb: 1 }}>
+          {Icon && <Icon sx={{ fontSize: 38, color: "#fff", mb: 1 }} />}
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#fff", mb: 1 }}>
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#f1f1f1", fontSize: "0.95rem" }}>
+          <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.85)", fontSize: "0.95rem" }}>
             {description}
           </Typography>
         </Box>
 
         {portfolioLink && (
-          <Stack direction="row" justifyContent="flex-end" sx={{ mt: 3 }}>
-            <Button
-              href={portfolioLink}
-              variant="outlined"
-              sx={{
-                fontWeight: 500,
-                borderRadius: "999px",
-                px: 3,
-                py: 1,
-                textTransform: "none",
-                color: "#fff",
-                borderColor: "rgba(255,255,255,0.5)",
-                "&:hover": {
-                  borderColor: "#fff",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                },
-              }}
-            >
-              View Work
-            </Button>
-          </Stack>
+          <Button
+            href={portfolioLink}
+            variant="text"
+            sx={{
+              mt: 2,
+              px: 0,
+              color: "#fff",
+              fontWeight: 500,
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
+            View Work →
+          </Button>
         )}
       </Box>
     </Card>
   );
 };
+
 
 export default RoleCard;

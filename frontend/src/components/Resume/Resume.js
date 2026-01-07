@@ -82,6 +82,17 @@ const Section = ({ title, icon, children }) => {
 
 const projects = [
   {
+    name: "TDX Arena IR Expert Challenges (Cybersecurity Forensics & Threat Detection Certification)",
+    tech: "Certification Issue Date: Nov 13, 2025",
+    date: "Certification ID: 1008363",
+    desc: [
+      "Performed end-to-end memory forensics by extracting artifacts from a Windows memory dump, recovering plaintext credentials, analyzing encrypted archives, and identifying hidden files within Office documents.",
+      "Conducted static malware triage on suspicious executables using Linux tooling (find, file, strings), validated results through ClamAV, and documented Indicators of Compromise (IOCs) for threat detection workflows.",
+      "Analyzed packet captures for malicious scanning behavior and engineered custom Snort IDS rules to detect TCP SYN scans, validating detection accuracy through Snorby alert correlation.",
+      "Applied industry tools such as tcpdump, Snort, ClamAV, grep, and hash generation utilities to simulate real incident response, threat hunting, and digital forensics processes.",
+    ],
+  },
+  {
     name: "DoomsProd E-Commerce",
     tech: "React, Node.js, Express, PostgreSQL, Sequelize, MUI, Stripe, Render, GitHub Actions",
     date: "Jan 2025 – May 2025",
@@ -95,17 +106,7 @@ const projects = [
       "Optimized product filtering, playback previews, and cart persistence using React state management and local storage.",
     ],
   },
-  {
-    name: "DoomsVerb – Audio Plugin",
-    tech: "C++, JUCE, VST/AU plugin formats",
-    date: "Sep 2023 – Nov 2023",
-    desc: [
-      "Designed and implemented a custom digital reverb DSP plugin focused on high-quality audio processing for professional audio engineers and producers.",
-      "Developed cross-platform compatibility and conducted extensive testing across major DAWs (Ableton Live, Logic Pro, Pro Tools), ensuring stable performance and accurate audio input validation.",
-      "Engineered memory-efficient algorithms with exception-safe coding practices to maintain real-time processing performance and prevent crashes or glitches.",
-      "Utilized JUCE framework for seamless integration with audio hosts, and optimized the UI for intuitive control over reverb parameters.",
-    ],
-  },
+
   {
     name: "Imagination – Stereo Imager",
     tech: "C++, JUCE, Real-time audio DSP",
@@ -133,7 +134,7 @@ const Resume = () => {
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ textAlign: "center" }}>
           <Typography variant="h2" fontWeight={800} letterSpacing={1}>Adam Elhamami</Typography>
           <Typography variant="h6" color={theme.palette.text.secondary} mt={1}>
-            Full Stack Developer • Cybersecurity Student • Audio Plugin Dev
+            Full Stack Developer • Cybersecurity Professional • Audio Plugin Dev
           </Typography>
           <Box display="flex" justifyContent="center" flexWrap="wrap" gap={4} mt={3}>
             <ContactItem icon={<Phone />} text="(201) 234‑2766" label="Phone" />
@@ -154,7 +155,7 @@ const Resume = () => {
             boxShadow: "0 8px 30px rgba(0, 0, 0, 0.15)",
           }}>
             <Typography variant="body1" lineHeight={1.8}>
-              Full‑stack software engineer across web & audio tech. Skilled in React, TS, Node.js, C++; experienced in scalable architecture, REST APIs, plugin development & CI/CD. 1M+ music streams. Currently pursuing NJIT’s Security+ certification.
+            Aspiring cybersecurity professional with a strong foundation in full-stack development, system administration, and secure coding practices. Pursuing a Comptia Security+ certification through NJIT with hands-on experience in network security, incident response, Windows/Linux/MacOS hardening and secure application development. Proven ability to build, deploy, and troubleshoot complex software solutions across web and audio platforms using JavaScript, React, SQL, C++ and cloud services.
             </Typography>
           </Box>
         </Section>
@@ -188,7 +189,7 @@ const Resume = () => {
             <Typography variant="h6" fontWeight={600}>NJIT Cyber‑Security Certification</Typography>
             <Typography variant="body2" gutterBottom>Feb 2025 – Nov 2025</Typography>
             <Typography variant="body2">
-              <strong>Relevant Coursework:</strong> TCP/IP, DNS, ARP, Microsoft Security Admin, Active Directory, GPO, System Hardening, SIEM, Secure Coding & CI/CD.
+              <strong>Relevant Coursework:</strong> NJIT-CS-82-THI (Threat Hunting & Intelligence), NJIT-CS-82-NETF (Computer Networking Fundamentals), NJIT-CS-82-DF (Incident Response & Digital Forensics)
             </Typography>
           </Box>
         </Section>
@@ -213,7 +214,7 @@ const Resume = () => {
                       <ListItem key={i} disablePadding>
                         <ListItemIcon>
                           <motion.div whileHover={{ scale: 1.1 }}>
-                            <Star sx={{ color: "#FFD700" }} />
+                            <Star sx={{ color: theme.palette.text.secondary }} />
                           </motion.div>
                         </ListItemIcon>
                         <ListItemText primary={d} />
