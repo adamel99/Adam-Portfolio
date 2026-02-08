@@ -11,6 +11,18 @@ module.exports = {
       options,
       [
         {
+          productName: "CompTIA Security+ Certified",
+          productType: "Cybersecurity Certificate",
+          price: 0,
+          description: "Completed NJIT's cybersecurity course and passed the CompTIA Security+ exam.",
+          uploadDate: new Date(),
+          filePath: "/Images/Untitled.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          genre: 'Cert',
+          userId: 3,
+        },
+        {
           productName: "TDX Arena Incident Response Expert",
           productType: "Certification ID: 1008363",
           price: 0,
